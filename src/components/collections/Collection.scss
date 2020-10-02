@@ -1,0 +1,26 @@
+.shop-collection {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    border-bottom: 2px dashed grey;
+
+    .collection-title {
+        font-size: 28px;
+
+        &:hover {
+            
+            cursor: pointer;
+        }
+    }
+
+    .collection-items {
+        //width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+}
+
+
+
