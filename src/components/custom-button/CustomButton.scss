@@ -1,0 +1,28 @@
+.custom-button {
+
+    padding: 10px 10px;
+    width: 45%;
+    font-weight: bold;
+    border: none;
+
+    &:hover {
+        background-color: white;
+        color: black;
+        cursor: pointer;
+    }
+
+}
+
+.sign-in__btn {
+    background-color: black;
+    color:white;
+    border: 1px solid black;
+}
+
+.google__btn {
+    background-color: #FF4136;
+    border: 1px solid #FF4136;
+    color: white;
+    
+}
+

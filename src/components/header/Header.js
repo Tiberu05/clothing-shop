@@ -1,26 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import {ReactComponent as Logo} from '../svg/icons_tinted-glass.svg';
 import './Header.scss';
 
-const Header = () => {
+import { auth } from '../../firebase/firebase.utils';
 
+const Header = ({ currentUser }) => {
+
+    const renderAuthButton = () => {
+        if (!currentUser) {
+            return <NavLink class='option' activeClass='active' to='/auth'>Sign In</NavLink>
+        } else {
+            return <a class='option' href='#' onClick={() => auth.signOut()}>Sign Out</a>
+        }
+    }
 
     return (
         <div className='header'>
             <div className="left-header-items">
                 <Link to='/'>
-                    <img src={require('../svg/tshirt.svg')} className='logo'></img>
-                    {/* <div className='logo devicons devicons-yeoman'></div> */}
+                    {/* <img src={require('../svg/tshirt.svg')} className='logo'></img> */}
+                    Home
                 </Link>
             </div>
 
             <div className='right-header-items'>
-                <Link to='/shop'>Shop</Link>
-                <Link to='/contact'>Contact</Link>
-                <Link to='/signin'>Sign In</Link>
-                <Link to='/cart'><ion-icon name="cart-outline"></ion-icon></Link>
+                <NavLink className='option' activeClass='active' exact to='/shop'>Shop</NavLink>
+                <NavLink className='option' activeClass='active' exact to='/contact'>Contact</NavLink>
+                {renderAuthButton()}
+                <NavLink className='option'activeClass='active' exact to='/cart'><ion-icon name="cart-outline"></ion-icon></NavLink>
             </div>
         </div>
     )
