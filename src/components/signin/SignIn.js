@@ -5,7 +5,7 @@ import './SignIn.scss';
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
 
-import { signInWithGoogle } from '../../firebase/firebase.utils.js';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils.js';
 
 
 const SignIn = (props) => {
@@ -16,6 +16,10 @@ const SignIn = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        auth.signInWithEmailAndPassword(email, password).catch(err => {
+            console.log(err)
+        });
 
         setEmail('');
         setPassword('');
@@ -44,7 +48,7 @@ const SignIn = (props) => {
                 />
                
                 <div className='button-area'>
-                    <CustomButton type='submit' buttonClass='sign-in__btn'>Sign In</CustomButton>
+                    <CustomButton type='submit'>Sign In</CustomButton>
                     <CustomButton type='button' onClick={signInWithGoogle} buttonClass='google__btn'>Sign in with Google</CustomButton>
                 </div>
 

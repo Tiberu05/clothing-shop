@@ -10,9 +10,9 @@ const Header = ({ currentUser }) => {
 
     const renderAuthButton = () => {
         if (!currentUser) {
-            return <NavLink class='option' activeClass='active' to='/auth'>Sign In</NavLink>
+            return <NavLink className='option' activeclass='active' to='/auth'>Sign In</NavLink>
         } else {
-            return <a class='option' href='#' onClick={() => auth.signOut()}>Sign Out</a>
+            return <a className='option' href='#' onClick={() => auth.signOut()}>Sign Out</a>
         }
     }
 
@@ -26,10 +26,10 @@ const Header = ({ currentUser }) => {
             </div>
 
             <div className='right-header-items'>
-                <NavLink className='option' activeClass='active' exact to='/shop'>Shop</NavLink>
-                <NavLink className='option' activeClass='active' exact to='/contact'>Contact</NavLink>
+                <NavLink className='option' activeclass='active' exact to='/shop'>Shop</NavLink>
+                <NavLink className='option' activeclass='active' exact to='/contact'>Contact</NavLink>
                 {renderAuthButton()}
-                <NavLink className='option'activeClass='active' exact to='/cart'><ion-icon name="cart-outline"></ion-icon></NavLink>
+                <NavLink className='option'activeclass='active' exact to='/cart'><ion-icon name="cart-outline"></ion-icon></NavLink>
             </div>
         </div>
     )

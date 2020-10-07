@@ -7,8 +7,6 @@ import CollectionItem from '../collection-item/CollectionItem';
 
 const Collection = ({ title, items, routeName, history, match }) => {
 
-    console.log(items);
-
     const renderItems = () => {
         const render = items.slice(0, 4).map(({ id, ...otherItemProps}) => {
             return (

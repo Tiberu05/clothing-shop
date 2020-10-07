@@ -8,7 +8,7 @@ import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import AuthPage from './pages/auth/AuthPage';
 
-import { auth } from './firebase/firebase.utils.js';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils.js';
 
 const App = () => {
 
@@ -17,10 +17,20 @@ const App = () => {
     let unsubscribeFromAuth = null;
 
     useEffect(() => {
-        unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-            setCurrentUser(user);
+        unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+            if (userAuth) {
+                const userRef = await createUserProfileDocument(userAuth);
 
-            console.log(user);
+                userRef.onSnapshot(snapShot => {
+                    setCurrentUser({ 
+                        id: snapShot.id, 
+                        ...snapShot.data() 
+                    });
+                })
+            } else {
+                setCurrentUser(null);
+            }
+
         })
 
 
@@ -28,6 +38,10 @@ const App = () => {
             unsubscribeFromAuth();
         }
     }, [])
+
+    useEffect(() => {
+        console.log(currentUser);
+    })
 
     return (
         <div>
