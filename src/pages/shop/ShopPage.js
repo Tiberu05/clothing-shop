@@ -29,7 +29,7 @@ class ShopPage extends React.Component {
     render() {
         return (
             <div className='shop-page'>
-                <h1 className='collections-page-title'>Collections</h1>
+                <h1 className='collections-page-title'>Collections </h1>
                 {this.renderCollections()}
             </div>
         )

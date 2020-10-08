@@ -6,6 +6,10 @@ import './Header.scss';
 
 import { auth } from '../../firebase/firebase.utils';
 
+import { connect } from 'react-redux';
+import { logOut } from '../../redux/actions/auth';
+
+
 const Header = ({ currentUser }) => {
 
     const renderAuthButton = () => {
@@ -17,6 +21,7 @@ const Header = ({ currentUser }) => {
     }
 
     return (
+
         <div className='header'>
             <div className="left-header-items">
                 <Link to='/'>
@@ -31,8 +36,19 @@ const Header = ({ currentUser }) => {
                 {renderAuthButton()}
                 <NavLink className='option'activeclass='active' exact to='/cart'><ion-icon name="cart-outline"></ion-icon></NavLink>
             </div>
-        </div>
+
+            <div className='nav-menu'>
+                <i class="bars icon"></i>
+            </div>
+        </div>      
+        
     )
 };
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        currentUser: state.auth.currentUser
+    }
+}
+
+export default connect(mapStateToProps, { logOut })(Header);

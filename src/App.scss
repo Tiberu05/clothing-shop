@@ -1,0 +1,41 @@
+html {
+    overflow: scroll;
+    font-size: 18px;
+
+}
+
+header {
+    padding: 15px;
+    background-color: white;
+    position: sticky;
+    z-index: 10;
+    box-shadow: 0 0 5px 0 rgba(29,31,32, 0.2);
+    //border-bottom: 1px solid grey;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Open Sans Condensed', sans-serif !important;
+    margin: 0;
+}
+
+.container {
+
+    width: 95%;
+    margin: 0 auto;
+
+    @media screen and (min-width: 960px) {
+        width: 85%;
+
+    }
+
+}

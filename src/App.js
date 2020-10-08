@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import './App.css';
+import { StickyContainer, Sticky } from 'react-sticky';
+
+import './App.scss';
 
 import HomePage from './pages/homepage/HomePage';
 import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import AuthPage from './pages/auth/AuthPage';
 
+import { setCurrentUser, logOut } from './redux/actions/auth';
+import { connect } from 'react-redux';
+
 import { auth, createUserProfileDocument } from './firebase/firebase.utils.js';
 
-const App = () => {
-
-    const [currentUser, setCurrentUser] = useState(null);
+const App = (props) => {
 
     let unsubscribeFromAuth = null;
 
@@ -22,13 +25,19 @@ const App = () => {
                 const userRef = await createUserProfileDocument(userAuth);
 
                 userRef.onSnapshot(snapShot => {
-                    setCurrentUser({ 
-                        id: snapShot.id, 
-                        ...snapShot.data() 
-                    });
+                    const userData = {
+                        id: snapShot.id,
+                        ...snapShot.data()
+                    };
+
+                    props.setCurrentUser(userData);
+                    // setCurrentUser({ 
+                    //     id: snapShot.id, 
+                    //     ...snapShot.data() 
+                    // });
                 })
             } else {
-                setCurrentUser(null);
+                props.logOut();
             }
 
         })
@@ -39,30 +48,51 @@ const App = () => {
         }
     }, [])
 
-    useEffect(() => {
-        console.log(currentUser);
-    })
 
     return (
         <div>
+            <StickyContainer>
+                <Sticky topOffset={180}>
+                    {({
+                        style,
+                        isSticky,
+                        wasSticky,
+                        distanceFromTop,
+                        distanceFromBottom,
+                        calculatedHeight
+                    }) => (
+                        <header style={style}>
+                            <div className='container'>
+                                <Header />
+                            </div>
+                        </header>
+                    )}
+                </Sticky>
+                {/* <header>
+                    <div className='container'>
+                        <Header currentUser={currentUser} />
+                    </div>
+                </header> */}
 
-            <header>
                 <div className='container'>
-                    <Header currentUser={currentUser} />
+                    <Switch>
+                        <Route exact path='/' component={HomePage} />
+                        <Route exact path='/shop' component={ShopPage} />
+                        <Route exact path='/auth' component={AuthPage} />
+                    </Switch>
                 </div>
-            </header>
 
-            <hr />
-            <div className='container'>
-                <Switch>
-                    <Route exact path='/' component={HomePage} />
-                    <Route exact path='/shop' component={ShopPage} />
-                    <Route exact path='/auth' component={AuthPage} />
-                </Switch>
-            </div>
+            </StickyContainer>
+            
+
+            
             
         </div>
     )
 };
 
-export default App;
+const mapStateToProps = state => {
+    return {};
+}
+
+export default connect(mapStateToProps, { setCurrentUser, logOut })(App);

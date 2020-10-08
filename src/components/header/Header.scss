@@ -1,13 +1,14 @@
 .header {
-    //padding: 5px 80px;
+    //padding: 20px;
     display: flex;
     align-items: center;
-    height: 50px;
-    margin-top: 5px;
-    font-size: 24px;
+    height: 30px;
+    font-size: 1.2rem;
+    color: black;
+    
 
     .active {
-        text-decoration: underline;
+        color: grey;
     }
 
     a {
@@ -18,20 +19,19 @@
 
     .logo {
         width: 30%;
-        margin-left: 0.2em;
         font-size: 3.5em;
         text-decoration: none;
         color: grey;
     }
 
     .left-header-items {
-        margin-left: 1em;
+
     }
 
     .right-header-items {
         margin-right: 1em;
         margin-left: auto;
-        display: flex;
+        display: none;
         justify-content: space-evenly;
 
         .option {
@@ -39,12 +39,31 @@
 
 
             &:hover {
-                text-decoration:underline;
+                color: grey;
             }
         }
 
         .cart-outline {
             transform: scaleX(2);
         }
+
+        @media screen and (min-width: 500px) {
+            display: block;
+        }
+    }
+
+    .nav-menu {
+
+        margin-left: auto;
+
+        @media screen and (min-width: 500px) {
+            display: none;
+        }
+
+
+        .bars.icon {
+            color: black;
+        }
+
     }
 }
