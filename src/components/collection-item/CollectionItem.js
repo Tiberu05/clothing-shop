@@ -1,8 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './CollectionItem.scss';
 
-const CollectionItem = ({ name, imageUrl, price }) => {
+import { addToCart } from '../../redux/actions/cart';
+
+const CollectionItem = ({ item, addToCart, cartItems }) => {
+
+    const { id, name, imageUrl, price } = item;
+
 
 
     return (
@@ -13,7 +19,7 @@ const CollectionItem = ({ name, imageUrl, price }) => {
                     backgroundImage: `url(${imageUrl})`
                 }}
             >
-                <div className='add-to-cart__btn'>Add to cart</div>
+                <div className='add-to-cart__btn' onClick={() => addToCart(item)}>Add to cart</div>
             </div>
             <div className='collection-item__footer'>
                 <span className='item-name'>{name}</span>
@@ -24,4 +30,10 @@ const CollectionItem = ({ name, imageUrl, price }) => {
     )
 };
 
-export default CollectionItem;
+const mapStateToProps = state => {
+    return { 
+        cartItems: state.cart.cartItems
+    }
+}
+
+export default connect(mapStateToProps, { addToCart })(CollectionItem);

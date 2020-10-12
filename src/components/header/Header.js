@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-import {ReactComponent as Logo} from '../svg/icons_tinted-glass.svg';
+import CartIcon from '../cart-icon/CartIcon';
+import CartDropdown from '../cart-dropdown/CartDropdown';
 import './Header.scss';
 
 import { auth } from '../../firebase/firebase.utils';
@@ -10,7 +11,7 @@ import { connect } from 'react-redux';
 import { logOut } from '../../redux/actions/auth';
 
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
 
     const renderAuthButton = () => {
         if (!currentUser) {
@@ -18,7 +19,7 @@ const Header = ({ currentUser }) => {
         } else {
             return <a className='option' href='#' onClick={() => auth.signOut()}>Sign Out</a>
         }
-    }
+    };
 
     return (
 
@@ -34,12 +35,17 @@ const Header = ({ currentUser }) => {
                 <NavLink className='option' activeclass='active' exact to='/shop'>Shop</NavLink>
                 <NavLink className='option' activeclass='active' exact to='/contact'>Contact</NavLink>
                 {renderAuthButton()}
-                <NavLink className='option'activeclass='active' exact to='/cart'><ion-icon name="cart-outline"></ion-icon></NavLink>
+                {/* <NavLink className='option'activeclass='active' exact to='/cart'><ion-icon name="cart-outline"></ion-icon></NavLink> */}
+                <CartIcon />
             </div>
+
+            {hidden ? null : <CartDropdown />}
 
             <div className='nav-menu'>
                 <i class="bars icon"></i>
             </div>
+
+            
         </div>      
         
     )
@@ -47,7 +53,8 @@ const Header = ({ currentUser }) => {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.auth.currentUser
+        currentUser: state.auth.currentUser,
+        hidden: state.cart.hidden
     }
 }
 

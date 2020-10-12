@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import reducers from './reducers';
 
-const middlewares = [logger, ReduxThunk];
+const middlewares = [ReduxThunk];
 
 const store = createStore(
     reducers, 

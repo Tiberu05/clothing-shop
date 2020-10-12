@@ -6,6 +6,7 @@
     width: 60%;
     height: 350px;
     overflow: hidden;
+    transition: all 200ms ease;
 
     @media screen and (min-width: 500px) {
         width: 40%;
@@ -39,7 +40,8 @@
         overflow: hidden;
 
         &:hover {
-            transform: scale(1.02);
+            //transform: scale(1.02);
+            
             //transition: transform 3s cubic-bezier(0.25, 0.25, 0.45, 0.95);
             
             & .add-to-cart__btn {
@@ -61,7 +63,7 @@
             opacity: 0.6;
             margin-top: 80%;
             visibility: hidden;
-            box-shadow: 0 5px 5px 5px rgba(29,31,32, 0.5);
+            box-shadow: 0 2px 2px 0 rgba(29,31,32, 0.2);
 
 
             &:hover {

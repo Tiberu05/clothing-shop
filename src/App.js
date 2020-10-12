@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { StickyContainer, Sticky } from 'react-sticky';
 
@@ -68,19 +68,24 @@ const App = (props) => {
                         </header>
                     )}
                 </Sticky>
-                {/* <header>
-                    <div className='container'>
-                        <Header currentUser={currentUser} />
-                    </div>
-                </header> */}
 
-                <div className='container'>
-                    <Switch>
-                        <Route exact path='/' component={HomePage} />
-                        <Route exact path='/shop' component={ShopPage} />
-                        <Route exact path='/auth' component={AuthPage} />
-                    </Switch>
-                </div>
+                <section>
+                    <div className='container'>
+                        <Switch>
+                            <Route exact path='/' component={HomePage} />
+                            <Route exact path='/shop' component={ShopPage} />
+                            <Route 
+                                exact 
+                                path='/auth' 
+                                render={() => props.currentUser ? (
+                                    <Redirect to='/'/>
+                                ) : (
+                                    <AuthPage />
+                                )} />
+                        </Switch>
+                    </div>
+                </section>
+                
 
             </StickyContainer>
             
@@ -92,7 +97,9 @@ const App = (props) => {
 };
 
 const mapStateToProps = state => {
-    return {};
+    return {
+        currentUser: state.auth.currentUser
+    };
 }
 
 export default connect(mapStateToProps, { setCurrentUser, logOut })(App);
