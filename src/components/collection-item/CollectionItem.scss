@@ -58,16 +58,25 @@
             justify-content: center;
             align-items: center;
             font-size: 1rem;
-            background-color:  #1d1f20;
-            color: white;
+            background-color:  white;
+            color: black;
             opacity: 0.6;
             margin-top: 80%;
             visibility: hidden;
-            box-shadow: 0 2px 2px 0 rgba(29,31,32, 0.2);
+            //box-shadow: 0 2px 2px 0 rgba(29,31,32, 0.2);
+            transition: all .1s;
+            outline: 1px solid black;
 
 
             &:hover {
                 opacity: 1;
+                transform: scale(1.02);
+                //outline: none;
+            }
+
+            &:active {
+                outline: none;
+                transform: scale(0.9);
             }
         }
     }

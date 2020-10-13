@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import CustomButton from '../custom-button/CustomButton';
 
@@ -7,24 +8,42 @@ import './CartDropdown.scss';
 
 import CartItem from '../cart-item/CartItem';
 
-import { selectCartItems } from '../../redux/reducers/cartSelector';
+import { toggleCart } from '../../redux/actions/cart';
+import { selectCartItems } from '../../redux/selectors/cartSelector';
 
 const CartDropdown = (props) => {
 
+    const renderInfo = () => {
+        if (props.cartItems.length === 0) {
+            return (
+                <div className='cart-items'>Your cart is empty</div>
+            )
+        } else {
+            return (
+                <div className='cart-items'>
+                    {props.cartItems.map(item => {
+                        return <CartItem 
+                                    key={item.id}
+                                    imageUrl={item.imageUrl}
+                                    name={item.name}
+                                    qty={item.qty}
+                                    totalPrice={item.totalPrice}
+                                    
+                                />
+                    })}
+                </div>
+            )
+        }
+    }
+
     return (
         <div className='cart-dropdown'>
-            <div className='cart-items'>
-                {props.cartItems.map(item => {
-                    return <CartItem 
-                                imageUrl={item.imageUrl}
-                                name={item.name}
-                                qty={item.qty}
-                                totalPrice={item.totalPrice}
-                                
-                            />
-                })}
-            </div>
-            <CustomButton>Go to checkout</CustomButton>
+            {renderInfo()}
+                <CustomButton className='custom-button cart-button' onClick={() => {
+                    props.toggleCart();
+                    props.history.push('/checkout')
+                }
+                }>Go to checkout</CustomButton>
         </div>
     )
 };
@@ -35,4 +54,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {})(CartDropdown);
+export default withRouter(connect(mapStateToProps, { toggleCart })(CartDropdown));

@@ -13,7 +13,7 @@
     z-index: 99;
   
     .cart-items {
-      height: 240px;
+      height: 280px;
       display: flex;
       flex-direction: column;
       overflow: scroll;
@@ -22,5 +22,10 @@
     button {
       margin-top: 0 auto;
       width: 100%;
+
+
+      &:hover {
+        background-color: linear-gradient(to right bottom, #1d1f20, black) !important;
+      }
     }
   }

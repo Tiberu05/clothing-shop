@@ -1,4 +1,4 @@
-import { addItemToCart } from './cartUtility';
+import { addItemToCart, removeItemFromCart, decreaseQtyCartItem, decreaseItemFromCart } from './cartUtility';
 
 const INITIAL_STATE = {
     hidden: true,
@@ -10,10 +10,19 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         case "TOGGLE_CART":
             return { ...state, hidden: !state.hidden };
         case "ADD_ITEM":
-
             return {
                 ...state,
                 cartItems: addItemToCart(state.cartItems, action.payload)
+            };
+        case "DECREASE_ITEM":
+            return {
+                ...state,
+                cartItems: decreaseItemFromCart(state.cartItems, action.payload)
+            }
+        case "REMOVE_ITEM":
+            return {
+                ...state,
+                cartItems: removeItemFromCart(state.cartItems, action.payload)
             }
         default:
             return state;

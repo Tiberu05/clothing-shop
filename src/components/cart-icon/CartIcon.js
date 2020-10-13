@@ -7,7 +7,7 @@ import './CartIcon.scss';
 
 import { toggleCart } from '../../redux/actions/cart';
 
-import { selectCartItemsCount } from '../../redux/reducers/cartSelector';
+import { selectCartItemsCount } from '../../redux/selectors/cartSelector';
 
 
 

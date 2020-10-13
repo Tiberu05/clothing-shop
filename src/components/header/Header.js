@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import CartIcon from '../cart-icon/CartIcon';
-import CartDropdown from '../cart-dropdown/CartDropdown';
+// CSS
 import './Header.scss';
 
+// FIREBASE
 import { auth } from '../../firebase/firebase.utils';
 
-import { connect } from 'react-redux';
+// COMPONENTS
+import CartIcon from '../cart-icon/CartIcon';
+import CartDropdown from '../cart-dropdown/CartDropdown';
+
+//REDUX
 import { logOut } from '../../redux/actions/auth';
+import { selectCartHidden } from '../../redux/selectors/cartSelector';
+import { selectCurrentUser } from '../../redux/selectors/userSelector';
+
+
 
 
 const Header = ({ currentUser, hidden }) => {
@@ -42,7 +52,7 @@ const Header = ({ currentUser, hidden }) => {
             {hidden ? null : <CartDropdown />}
 
             <div className='nav-menu'>
-                <i class="bars icon"></i>
+                <i className="bars icon"></i>
             </div>
 
             
@@ -51,11 +61,9 @@ const Header = ({ currentUser, hidden }) => {
     )
 };
 
-const mapStateToProps = state => {
-    return {
-        currentUser: state.auth.currentUser,
-        hidden: state.cart.hidden
-    }
-}
+const mapStateToProps = createStructuredSelector({
+        currentUser: selectCurrentUser,
+        hidden: selectCartHidden
+})
 
 export default connect(mapStateToProps, { logOut })(Header);
