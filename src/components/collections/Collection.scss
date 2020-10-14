@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     border-bottom: 2px dashed grey;
+    
 
     @media screen and (max-width: 340px) {
         //align-items: center;
@@ -11,6 +12,13 @@
 
     .collection-title {
         font-size: 1.5rem;
+        margin: 0 auto;
+        padding: 15px;
+
+        @media screen and (min-width: 960px) {
+            margin-left: 0;
+            padding-left: 0;
+        }
 
         &:hover {
             

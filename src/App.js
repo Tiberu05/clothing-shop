@@ -13,6 +13,7 @@ import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import AuthPage from './pages/auth/AuthPage';
 import CheckoutPage from './pages/checkout/CheckoutPage';
+import CollectionPage from './pages/collection-page/CollectionPage';
 
 // REDUX
 import { setCurrentUser, logOut } from './redux/actions/auth';
@@ -82,6 +83,7 @@ const App = (props) => {
                         <Switch>
                             <Route exact path='/' component={HomePage} />
                             <Route exact path='/shop' component={ShopPage} />
+                            <Route exact path='/shop/:category' component={CollectionPage} />
                             <Route exact path='/checkout' component={CheckoutPage} />
                             <Route 
                                 exact 

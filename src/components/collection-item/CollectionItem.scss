@@ -3,18 +3,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
+    width: 60vw;
     height: 350px;
     overflow: hidden;
     transition: all 200ms ease;
+    margin: 0 auto;
 
     @media screen and (min-width: 500px) {
-        width: 40%;
+        width: 40vw;
     }
 
-    @media screen and (min-width: 850px) {
-        width: 28%;
+    @media screen and (min-width: 960px) {
+        width: 22vw;
+        margin: 5px;
     }
+
 
 
     @media screen and (min-width: 960px) {

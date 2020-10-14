@@ -9,8 +9,12 @@
     background-color: white;
     opacity: none;
     top: 80px;
-    right: 40px;
-    z-index: 99;
+    right: 25px;
+    z-index: 10;
+
+    @media screen and(min-width: 960px) {
+      right: 140px;
+    }
   
     .cart-items {
       height: 280px;

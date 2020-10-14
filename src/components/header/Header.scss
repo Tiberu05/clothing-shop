@@ -1,8 +1,8 @@
 .header {
-    //padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     height: 30px;
     font-size: 1.2rem;
     color: black;
@@ -26,14 +26,14 @@
     }
 
     .left-header-items {
-
+        margin-left: 15px;
     }
 
     .right-header-items {
-        //margin-right: 1em;
+        margin-right: 15px;
         justify-content: flex-end;
-        display: none;
         justify-content: space-evenly;
+        display: none;
 
         .option {
             margin: 0 10px 0 10px;
@@ -58,6 +58,7 @@
     .nav-menu {
 
         margin-left: auto;
+        margin-right: 20px;
 
         @media screen and (min-width: 500px) {
             display: none;
@@ -69,4 +70,5 @@
         }
 
     }
+
 }

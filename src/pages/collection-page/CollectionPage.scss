@@ -1,0 +1,15 @@
+.collection-page {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    
+    .items {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+
+        .collection-item {
+            width: 100%;
+        }
+    }
+}

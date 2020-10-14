@@ -36,7 +36,7 @@ const CheckoutPage = ({ cartItems, deleteItemFromCart, totalPrice, addToCart, de
                 <div className='checkout-row'>
                     <div className='checkout-item image'><span className='total-price'></span></div>
                     <div className='checkout-item name'></div>
-                    <div className='checkout-item qty'></div>
+                    <div className='checkout-item qty'><span className='total-price'>TOTAL: </span></div>
                     <div className='checkout-item price'><span className='total-price total'>${totalPrice}</span></div>
                     <div className='checkout-item remove'></div>
                 
