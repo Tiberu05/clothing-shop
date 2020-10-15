@@ -16,6 +16,7 @@ import CheckoutPage from './pages/checkout/CheckoutPage';
 import CollectionPage from './pages/collection-page/CollectionPage';
 
 import CartDropdown from './components/cart-dropdown/CartDropdown';
+import MobileNav from './components/mobile-nav/MobileNav';
 
 // REDUX
 import { setCurrentUser, logOut } from './redux/actions/auth';
@@ -74,6 +75,7 @@ const App = (props) => {
             <header>      
                 <div className='container'>
                     {props.hidden ? null : <CartDropdown  />}
+                    {props.navMenuOn ? <MobileNav /> : null}
                     <Header />
                 </div>
             </header>
@@ -106,7 +108,8 @@ const App = (props) => {
 const mapStateToProps = state => {
     return {
         currentUser: selectCurrentUser(state),
-        hidden: state.cart.hidden
+        hidden: state.cart.hidden,
+        navMenuOn: state.nav.navMenuOn
     }
 
 }

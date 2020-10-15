@@ -12,16 +12,20 @@ import { auth } from '../../firebase/firebase.utils';
 // COMPONENTS
 import CartIcon from '../cart-icon/CartIcon';
 import CartDropdown from '../cart-dropdown/CartDropdown';
+import MobileNav from '../mobile-nav/MobileNav';
 
 //REDUX
 import { logOut } from '../../redux/actions/auth';
+import { toggleNavMenu } from '../../redux/actions/nav';
 import { selectCartHidden } from '../../redux/selectors/cartSelector';
 import { selectCurrentUser } from '../../redux/selectors/userSelector';
 
 
 
 
-const Header = ({ currentUser, hidden }) => {
+const Header = ({ currentUser, hidden, toggleNavMenu }) => {
+
+
 
     const renderAuthButton = () => {
         if (!currentUser) {
@@ -54,9 +58,9 @@ const Header = ({ currentUser, hidden }) => {
 
 
             <div className='nav-menu'>
-                <i className="bars icon"></i>
+                <CartIcon />
+                <i onClick={() => toggleNavMenu()} className="bars icon"></i>
             </div>
-
             
         </div>      
         
@@ -68,4 +72,4 @@ const mapStateToProps = createStructuredSelector({
         hidden: selectCartHidden
 })
 
-export default connect(mapStateToProps, { logOut })(Header);
+export default connect(mapStateToProps, { logOut, toggleNavMenu })(Header);

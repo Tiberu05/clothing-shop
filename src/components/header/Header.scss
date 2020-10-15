@@ -6,6 +6,8 @@
     height: 30px;
     font-size: 1.2rem;
     color: black;
+    position: relative;
+    z-index: 2;
     
 
     .active {
@@ -56,9 +58,16 @@
     }
 
     .nav-menu {
-
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 20%;
         margin-left: auto;
         margin-right: 20px;
+
+        .cart-icon {
+            margin-top: -5px;
+        }
 
         @media screen and (min-width: 500px) {
             display: none;

@@ -73,6 +73,10 @@
             }
        
         }
+
+        .remove {
+            width: 20%;
+        }
         
 
         &:last-child {
@@ -81,14 +85,21 @@
             justify-content: center;
             border-bottom: none;
 
+            .price {
+                text-align: right;
+            }
+
+            .remove {
+                margin-left: 10px;
+            }
+
             @media screen and (min-width: 720px) {
 
                 .total {
                     padding-left: 15px;
                 }
-            }
-
-            
+    
+            }      
         }
 
         .total-price {
@@ -113,8 +124,8 @@
         }
 
         .StripeCheckout {
-            width: 130%;
-            margin-left: 10px;
+            width: 100%;
+            left: 0;
 
             &:hover {
                 transform: scale(1.05);
