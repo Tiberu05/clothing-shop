@@ -52,7 +52,6 @@ const Header = ({ currentUser, hidden }) => {
                 
             </div>
 
-            
 
             <div className='nav-menu'>
                 <i className="bars icon"></i>

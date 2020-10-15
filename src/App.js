@@ -28,6 +28,14 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils.js';
 
 const App = (props) => {
 
+    // const [position, setPosition] = useState(0);
+
+    // useEffect(() => {
+    //     document.addEventListener('scroll', e => {
+    //         setPosition(window.scrollY);
+    //     })
+    // });
+
     let unsubscribeFromAuth = null;
 
     useEffect(() => {
@@ -62,50 +70,34 @@ const App = (props) => {
 
     return (
         <div>
-            {props.hidden ? null : <CartDropdown />}
-            <StickyContainer>
-                <Sticky topOffset={180}>
-                    {({
-                        style,
-                        isSticky,
-                        wasSticky,
-                        distanceFromTop,
-                        distanceFromBottom,
-                        calculatedHeight
-                    }) => (
-                        <header style={style}>
-                            
-                            <div className='container'>
-                                <Header />
-                            </div>
-                        </header>
-                    )}
-                </Sticky>
-
-                <section>
-                    <div className='container'>
-                        <Switch>
-                            <Route exact path='/' component={HomePage} />
-                            <Route exact path='/shop' component={ShopPage} />
-                            <Route exact path='/shop/:category' component={CollectionPage} />
-                            <Route exact path='/checkout' component={CheckoutPage} />
-                            <Route 
-                                exact 
-                                path='/auth' 
-                                render={() => props.currentUser ? (
-                                    <Redirect to='/'/>
-                                ) : (
-                                    <AuthPage />
-                                )} />
-                        </Switch>
-                    </div>
-                </section>
-                
-
-            </StickyContainer>
-            
-
-            
+        
+            <header>      
+                <div className='container'>
+                    {props.hidden ? null : <CartDropdown  />}
+                    <Header />
+                </div>
+            </header>
+                    
+                    
+            <section>
+                <div className='container'>
+                    
+                    <Switch>
+                        <Route exact path='/' component={HomePage} />
+                        <Route exact path='/shop' component={ShopPage} />
+                        <Route exact path='/shop/:category' component={CollectionPage} />
+                        <Route exact path='/checkout' component={CheckoutPage} />
+                        <Route 
+                            exact 
+                            path='/auth' 
+                            render={() => props.currentUser ? (
+                                <Redirect to='/'/>
+                            ) : (
+                                <AuthPage />
+                            )} />
+                    </Switch>
+                </div>
+            </section>  
             
         </div>
     )
