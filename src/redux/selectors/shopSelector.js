@@ -10,7 +10,7 @@ export const selectCollections = createSelector(
 
 export const selectCollection = memoize(urlParam => createSelector(
     [selectCollections],
-    collections => collections.find(collection => collection.title.toLowerCase() === urlParam)
+    collections => collections[urlParam]
 ));
 
 export const selectCollectionItems = createSelector(

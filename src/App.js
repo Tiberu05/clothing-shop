@@ -15,6 +15,8 @@ import AuthPage from './pages/auth/AuthPage';
 import CheckoutPage from './pages/checkout/CheckoutPage';
 import CollectionPage from './pages/collection-page/CollectionPage';
 
+import CartDropdown from './components/cart-dropdown/CartDropdown';
+
 // REDUX
 import { setCurrentUser, logOut } from './redux/actions/auth';
 import { selectCurrentUser } from './redux/selectors/userSelector';
@@ -60,6 +62,7 @@ const App = (props) => {
 
     return (
         <div>
+            {props.hidden ? null : <CartDropdown />}
             <StickyContainer>
                 <Sticky topOffset={180}>
                     {({
@@ -71,6 +74,7 @@ const App = (props) => {
                         calculatedHeight
                     }) => (
                         <header style={style}>
+                            
                             <div className='container'>
                                 <Header />
                             </div>
@@ -107,8 +111,12 @@ const App = (props) => {
     )
 };
 
-const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser
-})
+const mapStateToProps = state => {
+    return {
+        currentUser: selectCurrentUser(state),
+        hidden: state.cart.hidden
+    }
+
+}
 
 export default connect(mapStateToProps, { setCurrentUser, logOut })(App);

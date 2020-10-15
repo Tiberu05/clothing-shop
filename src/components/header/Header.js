@@ -34,6 +34,7 @@ const Header = ({ currentUser, hidden }) => {
     return (
 
         <div className='header'>
+            
             <div className="left-header-items">
                 <Link to='/'>
                     {/* <img src={require('../svg/tshirt.svg')} className='logo'></img> */}
@@ -47,9 +48,11 @@ const Header = ({ currentUser, hidden }) => {
                 {renderAuthButton()}
                 {/* <NavLink className='option'activeclass='active' exact to='/cart'><ion-icon name="cart-outline"></ion-icon></NavLink> */}
                 <CartIcon />
+
+                
             </div>
 
-            {hidden ? null : <CartDropdown />}
+            
 
             <div className='nav-menu'>
                 <i className="bars icon"></i>

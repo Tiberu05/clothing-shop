@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import './CheckoutPage.scss';
 
+import StripeCheckoutButton from '../../components/stripe-button/StripeButton';
+
 import { selectCartItems, cartItemsTotalPrice } from '../../redux/selectors/cartSelector';
 import { addToCart, deleteItemFromCart, decreaseItem } from '../../redux/actions/cart';
 
@@ -38,7 +40,7 @@ const CheckoutPage = ({ cartItems, deleteItemFromCart, totalPrice, addToCart, de
                     <div className='checkout-item name'></div>
                     <div className='checkout-item qty'><span className='total-price'>TOTAL: </span></div>
                     <div className='checkout-item price'><span className='total-price total'>${totalPrice}</span></div>
-                    <div className='checkout-item remove'></div>
+                    <div className='checkout-item remove'><StripeCheckoutButton price={totalPrice}/></div>
                 
                 </div>
             )
@@ -55,12 +57,18 @@ const CheckoutPage = ({ cartItems, deleteItemFromCart, totalPrice, addToCart, de
                 <div className='checkout-item name'>Description</div>
                 <div className='checkout-item qty'>Quantity</div>
                 <div className='checkout-item price'>Price</div>
-                <div className='checkout-item remove'>Remove</div>
+                <div className='checkout-item remove'>Action</div>
             </div>
             <div className='checkout-body'>
                 {renderCartItems()}
                 {renderTotal()}
             </div>
+
+            <div className='test-warning'>
+                <span>Please use the following creadit card for payments test</span>
+                <span>4242-4242-4242-4242 - Any date in the future - CW: 123</span>
+            </div>
+            
         </div>
         
     )

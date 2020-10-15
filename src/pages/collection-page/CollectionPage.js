@@ -14,6 +14,8 @@ const CollectionPage = (props) => {
     //     }
     // });
 
+    console.log(props.collection);
+
     const renderCollectionItems = () => {
         const render = props.collection.items.map(item => {
             return <CollectionItem item={item} />

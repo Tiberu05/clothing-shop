@@ -28,10 +28,24 @@
 
     .collection-items {
         //width: 100%;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        // justify-content: space-between;
+        // flex-wrap: wrap;
+        //align-items: center;
+
+        @media screen and (min-width: 380px) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media screen and (min-width: 768px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @media screen and (min-width: 960px) {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
     }
 }
 

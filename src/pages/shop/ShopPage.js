@@ -28,7 +28,7 @@ const  ShopPage = ({ collections }) => {
 
 const mapStateToProps = state => {
     return {
-        collections: selectCollections(state)
+        collections: Object.values(selectCollections(state))
     }
 }
 
