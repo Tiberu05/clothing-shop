@@ -8,6 +8,8 @@
     overflow: hidden;
     transition: all 200ms ease;
     margin: 0 auto;
+    box-shadow: 0 0 5px #999;
+    //box-shadow: 0 0 20px -6px rgba(29,31,32, 0.6);
 
     @media screen and (min-width: 500px) {
         width: 100%;
@@ -36,6 +38,7 @@
         justify-content: center;
         margin-bottom: 5px;
         overflow: hidden;
+        border-bottom: 2px solid grey;
 
         &:hover {
             //transform: scale(1.02);
@@ -84,7 +87,8 @@
         height: 5%;
         display: flex;
         justify-content: space-between;
-        font-size: 1rem;
+        font-size: 1.2rem;
+        padding: 5px 10px 15px;
 
 
         .item-name {

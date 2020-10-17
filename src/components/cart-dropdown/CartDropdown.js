@@ -43,7 +43,7 @@ const CartDropdown = (props) => {
     return (
             <div className='cart-dropdown' >
                 {renderInfo()}
-                    <CustomButton className='custom-button cart-button' onClick={() => {
+                    <CustomButton className='custom-button inverted cart-button' onClick={() => {
                         props.toggleCart();
                         props.history.push('/checkout')
                     }
