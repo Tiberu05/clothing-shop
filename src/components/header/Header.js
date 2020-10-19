@@ -25,6 +25,14 @@ import { selectCurrentUser } from '../../redux/selectors/userSelector';
 
 const Header = ({ currentUser, hidden, toggleNavMenu }) => {
 
+    const [extraNavClass, setExtraNavClass] = useState('hidden');
+    const [shrinked, setShrinked] = useState('');
+
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            window.pageYOffset >= 100 ? setShrinked('shrinked') : setShrinked('');
+        })
+    }, [])
 
 
     const renderAuthButton = () => {
@@ -35,9 +43,13 @@ const Header = ({ currentUser, hidden, toggleNavMenu }) => {
         }
     };
 
+    const toggleNavAnimation = () => {
+        extraNavClass === 'hidden' ? setExtraNavClass('active') : setExtraNavClass('hidden');
+    }
+
     return (
 
-        <div className='header'>
+        <div className={`header ${shrinked}`}>
             
             <div className="left-header-items">
                 <Link to='/'>
@@ -59,7 +71,10 @@ const Header = ({ currentUser, hidden, toggleNavMenu }) => {
 
             <div className='nav-menu'>
                 <CartIcon />
-                <i onClick={() => toggleNavMenu()} className="bars icon"></i>
+                <i onClick={() => {
+                    toggleNavMenu()
+                    toggleNavAnimation()
+                }} className={`bars icon ${extraNavClass}`}></i>
             </div>
             
         </div>      
