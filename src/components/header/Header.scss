@@ -103,6 +103,7 @@
                 }
 
                 75% {
+                    font-size: 0.25rem;
                     opacity: 0.2;
                 }
 
@@ -114,6 +115,10 @@
             @keyframes rotateInverted {
                 from {
                     transform: rotate(180deg);
+                }
+
+                25% {
+                    font-size: 0.25rem;
                 }
 
                 50% {

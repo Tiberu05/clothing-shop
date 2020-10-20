@@ -1,73 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import './ShopPage.scss';
 
-import Spinner from '../../components/spinner/Spinner';
-import Collection from '../../components/collections/Collection';
-import CollectionPage from '../collection-page/CollectionPage';
-import CollectionsOverview from '../../components/CollectionsOverview/CollectionsOverview';
+import CollectionPageContainer from '../collection-page/CollectionPage.container';
+import CollectionsOverviewContainer from '../../components/CollectionsOverview/CollectionsOverview.container';
 
-import { firestore, convertCollectionsSnapshot } from '../../firebase/firebase.utils';
 
 import { getCollectionsAction } from '../../redux/actions/shop';
-import { selectCollections } from '../../redux/selectors/shopSelector';
 
 
-const CollectionsWithSpinner = Spinner(CollectionsOverview);
-const CollectionPageWithSpinner = Spinner(CollectionPage);
+const  ShopPage = ({ getCollectionsAction, match, }) => {
 
-const  ShopPage = ({ collections, getCollectionsAction, match }) => {
-
-    const [loading, setLoading] = useState(true);
-
-    let unsubscribeFromSnapshot = null;
 
     useEffect(() => {
-        const collectionRef = firestore.collection('collections');
 
-        collectionRef.onSnapshot(async snapShot => {
-            const collections = convertCollectionsSnapshot(snapShot)
-            getCollectionsAction(collections);
-            setLoading(false);
-        })
+        getCollectionsAction();
+
     }, [])
     
-    // const renderCollections = () => {
-    //     const render = collections.map(({ id, ...otherCollectionProps }) => {
-    //         return <Collection key={id} {...otherCollectionProps} />
-    //     })
-
-    //     return render;
-    // }
-
-    console.log(collections);
 
     return (
-        <div className='shop-page'>\
+        <div className='shop-page'>
             <Route 
                 exact 
                 path={`${match.path}`} 
-                render={(props) => (
-                <CollectionsWithSpinner isLoading={loading} {...props} /> )}
+                component={CollectionsOverviewContainer} 
             />
             <Route 
                 exact 
                 path={`${match.path}/:category`} 
-                render={props => (
-                    <CollectionPageWithSpinner isLoading={loading} {...props} />
-                )} 
+                component={CollectionPageContainer}
             />
         </div>
     )
 
 };
 
-const mapStateToProps = state => {
-    return {
-        collections: Object.values(selectCollections(state))
-    }
-}
 
-export default connect(mapStateToProps, { getCollectionsAction })(ShopPage);
+export default connect(null, { getCollectionsAction })(ShopPage);

@@ -2,18 +2,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { selectCollection } from '../../redux/selectors/shopSelector';
 
-import Spinner from '../../components/spinner/Spinner';
 import CollectionItem from '../../components/collection-item/CollectionItem';
 
 import './CollectionPage.scss';
 
 const CollectionPage = (props) => {
-
-    // const specificCollection = props.collections.find(collection => {
-    //     if (collection.title.toLowerCase() === props.match.params.category) {
-    //         return collection;
-    //     }
-    // });
 
     useEffect(() => {
         window.scrollTo(0, 0);
