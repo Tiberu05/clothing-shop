@@ -23,7 +23,7 @@ import { selectCurrentUser } from '../../redux/selectors/userSelector';
 
 
 
-const Header = ({ currentUser, hidden, toggleNavMenu }) => {
+const Header = ({ currentUser, hidden, toggleNavMenu, navMenuOn }) => {
 
     const [extraNavClass, setExtraNavClass] = useState('hidden');
     const [shrinked, setShrinked] = useState('');
@@ -71,10 +71,22 @@ const Header = ({ currentUser, hidden, toggleNavMenu }) => {
 
             <div className='nav-menu'>
                 <CartIcon />
-                <i onClick={() => {
-                    toggleNavMenu()
-                    toggleNavAnimation()
-                }} className={`bars icon ${extraNavClass}`}></i>
+                {navMenuOn && 
+                    <ion-icon onClick={() => {
+
+                        toggleNavMenu()
+
+                    }} name="close-outline"></ion-icon>
+                }
+                {!navMenuOn && 
+                    <i onClick={() => {
+                        setTimeout(() => {
+                            toggleNavMenu()
+                        }, 200)
+                        toggleNavAnimation()
+                    }} className={`bars icon ${extraNavClass}`}></i>
+                }
+
             </div>
             
         </div>      
@@ -82,9 +94,13 @@ const Header = ({ currentUser, hidden, toggleNavMenu }) => {
     )
 };
 
-const mapStateToProps = createStructuredSelector({
+const mapStateToProps = state => {
+    return {
         currentUser: selectCurrentUser,
-        hidden: selectCartHidden
-})
+        hidden: selectCartHidden,
+        navMenuOn: state.nav.navMenuOn
+    }
+
+}
 
 export default connect(mapStateToProps, { logOut, toggleNavMenu })(Header);

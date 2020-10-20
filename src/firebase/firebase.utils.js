@@ -46,7 +46,58 @@ export const createUserProfileDocument = async (userAuth, aditionalData) => {
 }
 
 
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
 
+    const batch = firestore.batch();
+
+    objectsToAdd.forEach(obj => {
+        const newDocRef = collectionRef.doc();
+        batch.set(newDocRef, obj);
+    });
+
+    return await batch.commit();
+};
+
+export const getCollections = async () => {
+    const collectionsRef = firestore.collection('collections');
+
+    const collectionsData = await collectionsRef.get();
+
+    const collectionsDocs = await collectionsData.docs.map(doc => doc.data());
+
+    const convertArrayToObject = (array, key) => {
+        const initialValue = {};
+        return array.reduce((obj, item) => {
+          return {
+            ...obj,
+            [item[key]]: {...item, id: item.id, routeName: item[key].toLowerCase()},
+          };
+        }, initialValue);
+      };
+
+    const collections = convertArrayToObject(collectionsDocs, 'title');
+    
+    return collections;
+};
+
+export const convertCollectionsSnapshot = collections => {
+    const transformedCollection = collections.docs.map(doc => {
+        const { title, items } = doc.data();
+
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id: doc.id,
+            title,
+            items
+        }
+    })
+
+    return transformedCollection.reduce((acc, collection) => {
+        acc[collection.title.toLowerCase()] = collection;
+        return acc;
+    }, {})
+};
 
 
 const provider = new firebase.auth.GoogleAuthProvider();

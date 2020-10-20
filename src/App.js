@@ -19,27 +19,22 @@ import CartDropdown from './components/cart-dropdown/CartDropdown';
 import MobileNav from './components/mobile-nav/MobileNav';
 
 // REDUX
+import { getCollectionsAction } from './redux/actions/shop';
 import { setCurrentUser, logOut } from './redux/actions/auth';
 import { selectCurrentUser } from './redux/selectors/userSelector';
+import { selectCollections } from './redux/selectors/shopSelector';
 
 // FIREBASE
-import { auth, createUserProfileDocument } from './firebase/firebase.utils.js';
+import { auth, createUserProfileDocument, getCollections, addCollectionAndDocuments } from './firebase/firebase.utils.js';
 
 
 
 const App = (props) => {
 
-    // const [position, setPosition] = useState(0);
-
-    // useEffect(() => {
-    //     document.addEventListener('scroll', e => {
-    //         setPosition(window.scrollY);
-    //     })
-    // });
-
     let unsubscribeFromAuth = null;
 
     useEffect(() => {
+
         unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
             if (userAuth) {
                 const userRef = await createUserProfileDocument(userAuth);
@@ -57,7 +52,9 @@ const App = (props) => {
                     // });
                 })
             } else {
-                props.logOut();
+                props.setCurrentUser(userAuth)
+                //addCollectionAndDocuments('collections', props.collectionsArray.map(({ title, items }) =>  ({ title, items }) ));
+                
             }
 
         })
@@ -86,8 +83,8 @@ const App = (props) => {
                     
                     <Switch>
                         <Route exact path='/' component={HomePage} />
-                        <Route exact path='/shop' component={ShopPage} />
-                        <Route exact path='/shop/:category' component={CollectionPage} />
+                        <Route path='/shop' component={ShopPage} />
+                        {/* <Route exact path='/shop/:category' component={CollectionPage} /> */}
                         <Route exact path='/checkout' component={CheckoutPage} />
                         <Route 
                             exact 
@@ -109,9 +106,10 @@ const mapStateToProps = state => {
     return {
         currentUser: selectCurrentUser(state),
         hidden: state.cart.hidden,
-        navMenuOn: state.nav.navMenuOn
+        navMenuOn: state.nav.navMenuOn,
+        collectionsArray: Object.values(selectCollections(state))
     }
 
 }
 
-export default connect(mapStateToProps, { setCurrentUser, logOut })(App);
+export default connect(mapStateToProps, { setCurrentUser, logOut, getCollectionsAction })(App);

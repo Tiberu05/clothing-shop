@@ -7,10 +7,10 @@
     position: absolute;
     display: flex;
     justify-content: center;
-    top: 59.55px;
+    top: 70px;
     z-index: 1;
     padding: 20px;
-    animation: topToDown 0.5s ease;
+    animation: topToDown 0.3s linear;
     border-bottom: 1px solid grey;
 
 
