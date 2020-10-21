@@ -8,15 +8,17 @@ import CollectionPageContainer from '../collection-page/CollectionPage.container
 import CollectionsOverviewContainer from '../../components/CollectionsOverview/CollectionsOverview.container';
 
 
-import { getCollectionsAction } from '../../redux/actions/shop';
+//import { getCollectionsAction } from '../../redux/actions/shop';
+
+import { fetchCollectionsAsync, fetchCollectionsStart } from '../../redux/actions/shop';
 
 
-const  ShopPage = ({ getCollectionsAction, match, }) => {
+const  ShopPage = ({ fetchCollectionsStart, match, }) => {
 
 
     useEffect(() => {
 
-        getCollectionsAction();
+        fetchCollectionsStart();
 
     }, [])
     
@@ -39,4 +41,4 @@ const  ShopPage = ({ getCollectionsAction, match, }) => {
 };
 
 
-export default connect(null, { getCollectionsAction })(ShopPage);
+export default connect(null, { fetchCollectionsStart })(ShopPage);

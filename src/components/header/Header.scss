@@ -9,8 +9,6 @@
     position: relative;
     z-index: 2;
 
-    
-
     .active {
         color: grey;
     }
@@ -66,9 +64,14 @@
         margin-left: auto;
         margin-right: 20px;
 
+        
+
         .cart-icon {
             margin-top: -5px;
+
         }
+
+        
 
         @media screen and (min-width: 680px) {
             width: 12%
@@ -95,6 +98,7 @@
             @keyframes rotateMenu {
                 from {
                     transform: rotate(0);
+                    font-size: 0.75rem;
                 }
         
                 50% {

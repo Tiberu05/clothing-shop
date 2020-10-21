@@ -5,7 +5,6 @@ const INITIAL_STATE ={
 const navReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case "TOGGLE_NAV_MENU":
-            console.log('salt');
             return {...state, navMenuOn: !state.navMenuOn }
         default:
             return state;

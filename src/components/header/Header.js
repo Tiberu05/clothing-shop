@@ -64,10 +64,9 @@ const Header = ({ currentUser, hidden, toggleNavMenu, navMenuOn }) => {
                 {renderAuthButton()}
                 {/* <NavLink className='option'activeclass='active' exact to='/cart'><ion-icon name="cart-outline"></ion-icon></NavLink> */}
                 <CartIcon />
-
+                
                 
             </div>
-
 
             <div className='nav-menu'>
                 <CartIcon />
@@ -75,7 +74,7 @@ const Header = ({ currentUser, hidden, toggleNavMenu, navMenuOn }) => {
                     <ion-icon onClick={() => {
 
                         toggleNavMenu()
-
+                        
                     }} name="close-outline"></ion-icon>
                 }
                 {!navMenuOn && 

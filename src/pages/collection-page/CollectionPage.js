@@ -15,7 +15,7 @@ const CollectionPage = (props) => {
     const renderCollectionItems = () => {
         if (props.collection) {
             const render = props.collection.items.map(item => {
-                return <CollectionItem item={item} />
+                return <CollectionItem key={item.id} item={item} />
             })
     
             return render;

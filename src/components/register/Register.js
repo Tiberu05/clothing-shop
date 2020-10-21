@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import './Register.scss'
 
@@ -6,7 +7,9 @@ import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
-const Register = () => {
+import { signUpStart } from '../../redux/actions/auth';
+
+const Register = (props) => {
 
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
@@ -23,9 +26,19 @@ const Register = () => {
         }
 
         try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
+            const userObj = {
+                email,
+                password,
+                displayName
+            };
 
-            createUserProfileDocument(user, { displayName });
+            props.signUpStart(userObj);
+
+            // const { user } = await auth.createUserWithEmailAndPassword(email, password);
+
+            // createUserProfileDocument(user, { displayName });
+
+
 
             setDisplayName('');
             setEmail('');
@@ -79,4 +92,4 @@ const Register = () => {
     )
 };
 
-export default Register;
+export default connect(null, { signUpStart })(Register);

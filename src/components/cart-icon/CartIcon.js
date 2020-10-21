@@ -2,21 +2,24 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import CartDropdown from '../cart-dropdown/CartDropdown';
+
 import {ReactComponent as ShoppingBag} from '../../assets/shopping-bag.svg';
 import './CartIcon.scss';
 
-import { toggleCart } from '../../redux/actions/cart';
 
 import { selectCartItemsCount } from '../../redux/selectors/cartSelector';
 
 
 
 
-const CartIcon = ({ itemsCount, toggleCart }) => {
+const CartIcon = ({ itemsCount, toggleCart, showCart, hideCart }) => {
+
+
 
 
     return (
-        <NavLink to='#' className='cart-icon option' onClick={() => toggleCart()}>
+        <NavLink to='/checkout' className='cart-icon option'>
             <ShoppingBag className='shopping-icon' />
             <span className='items-count'>{itemsCount}</span>
         </NavLink>
@@ -31,4 +34,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps, { toggleCart })(CartIcon);
+export default connect(mapStateToProps, { })(CartIcon);

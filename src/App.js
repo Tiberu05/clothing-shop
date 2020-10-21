@@ -19,8 +19,7 @@ import CartDropdown from './components/cart-dropdown/CartDropdown';
 import MobileNav from './components/mobile-nav/MobileNav';
 
 // REDUX
-import { getCollectionsAction } from './redux/actions/shop';
-import { setCurrentUser, logOut } from './redux/actions/auth';
+import { checkUserSession, logOut } from './redux/actions/auth';
 import { selectCurrentUser } from './redux/selectors/userSelector';
 import { selectCollections } from './redux/selectors/shopSelector';
 
@@ -31,40 +30,10 @@ import { auth, createUserProfileDocument, getCollections, addCollectionAndDocume
 
 const App = (props) => {
 
-    let unsubscribeFromAuth = null;
-
     useEffect(() => {
-
-        unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-            if (userAuth) {
-                const userRef = await createUserProfileDocument(userAuth);
-
-                userRef.onSnapshot(snapShot => {
-                    const userData = {
-                        id: snapShot.id,
-                        ...snapShot.data()
-                    };
-
-                    props.setCurrentUser(userData);
-                    // setCurrentUser({ 
-                    //     id: snapShot.id, 
-                    //     ...snapShot.data() 
-                    // });
-                })
-            } else {
-                props.setCurrentUser(userAuth)
-                //addCollectionAndDocuments('collections', props.collectionsArray.map(({ title, items }) =>  ({ title, items }) ));
-                
-            }
-
-        })
-
-
-        return () => {
-            unsubscribeFromAuth();
-        }
-    }, [])
-
+        const {checkUserSession} = props;
+        checkUserSession();
+    }, []);
 
     return (
         <div>
@@ -72,6 +41,7 @@ const App = (props) => {
             <header>      
                 <div className='container'>
                     {props.hidden ? null : <CartDropdown  />}
+                    
                     {props.navMenuOn ? <MobileNav /> : null}
                     <Header />
                 </div>
@@ -112,4 +82,4 @@ const mapStateToProps = state => {
 
 }
 
-export default connect(mapStateToProps, { setCurrentUser, logOut, getCollectionsAction })(App);
+export default connect(mapStateToProps, { checkUserSession, logOut })(App);

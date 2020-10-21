@@ -8,7 +8,7 @@ import './CartDropdown.scss';
 
 import CartItem from '../cart-item/CartItem';
 
-import { toggleCart } from '../../redux/actions/cart';
+import { toggleCart, showCart, hideCart } from '../../redux/actions/cart';
 import { selectCartItems } from '../../redux/selectors/cartSelector';
 
 const CartDropdown = (props) => {
@@ -38,10 +38,11 @@ const CartDropdown = (props) => {
         }
     }
 
+
     // style={{ top: `${props.position + 70}px`, right: `20px`}}
 
     return (
-            <div className='cart-dropdown' >
+            <div className='cart-dropdown' onMouseEnter={props.showCart} >
                 {renderInfo()}
                     <CustomButton className='custom-button inverted cart-button' onClick={() => {
                         props.toggleCart();
@@ -59,4 +60,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, { toggleCart })(CartDropdown));
+export default withRouter(connect(mapStateToProps, { toggleCart, showCart, hideCart })(CartDropdown));

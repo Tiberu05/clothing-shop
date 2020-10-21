@@ -7,6 +7,18 @@ export const toggleCart = () => {
     }
 };
 
+export const showCart = () => {
+    return {
+        type: "SHOW_CART" 
+    }
+};
+
+export const hideCart = () => {
+    return {
+        type: "HIDE_CART" 
+    }
+};
+
 export const addToCart = (item) => {
 
    return {
@@ -30,4 +42,9 @@ export const decreaseItem = item => {
     }
 };
 
+export const clearCart = () => {
+    return {
+        type: "CLEAR_CART"
+    }
+};
 

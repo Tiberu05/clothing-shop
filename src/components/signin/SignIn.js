@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import './SignIn.scss';
 
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
 
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils.js';
+import { auth } from '../../firebase/firebase.utils.js';
+
+import { googleSignInStart, emailSignInStart } from '../../redux/actions/auth';
+
 
 
 const SignIn = (props) => {
@@ -17,9 +21,12 @@ const SignIn = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        auth.signInWithEmailAndPassword(email, password).catch(err => {
-            console.log(err)
-        });
+        const emailAndPassword = {
+            email,
+            password
+        }
+
+        props.emailSignInStart(emailAndPassword)
 
         setEmail('');
         setPassword('');
@@ -49,13 +56,21 @@ const SignIn = (props) => {
                
                 <div className='button-area'>
                     <CustomButton type='submit'>Sign In</CustomButton>
-                    <CustomButton type='button' onClick={signInWithGoogle} buttonClass='google__btn'>Sign in with Google</CustomButton>
+                    <CustomButton type='button' onClick={props.googleSignInStart} buttonClass='google__btn'>Sign in with Google</CustomButton>
                 </div>
 
             </form>
+
+            <span className='error-message'>
+                {props.errorMessage}
+            </span>
 
         </div>
     )
 }
 
-export default SignIn;
+const mapStateToProps = state => ({
+    errorMessage: state.auth.error
+})
+
+export default connect(mapStateToProps, { googleSignInStart, emailSignInStart })(SignIn);

@@ -1,17 +1,30 @@
 import { firestore, convertCollectionsSnapshot } from '../../firebase/firebase.utils';
 
+export const fetchCollectionsStart = () => {
+    return { type: "GET_COLLECTIONS_START" }
+};
 
-export const getCollectionsAction = () => dispatch => {
+export const fetchCollectionsSucces = (collections) => {
+    return { type: "GET_COLLECTIONS_SUCCES", payload: collections }
+};
 
-    dispatch({ type: "GET_COLLECTIONS_START" });
+export const fetchCollectionsFail = (error) => {
+    return { type: "GET_COLLECTIONS_FAIL", payload: error}
+};
 
-    const collectionRef = firestore.collection('collections');
 
-    collectionRef.get()
-        .then(snapshot => {
-        const collections = convertCollectionsSnapshot(snapshot)
-        dispatch({ type: "GET_COLLECTIONS_SUCCES", payload: collections})
-    }).catch(error => dispatch({ type: "GET_COLLECTIONS_FAIL", payload: error.message}))
+// WITH REDUX THUNK
+// export const getCollectionsAction = () => dispatch => {
+
+//     dispatch({ type: "GET_COLLECTIONS_START" });
+
+//     const collectionRef = firestore.collection('collections');
+
+//     collectionRef.get()
+//         .then(snapshot => {
+//         const collections = convertCollectionsSnapshot(snapshot)
+//         dispatch({ type: "GET_COLLECTIONS_SUCCES", payload: collections})
+//     }).catch(error => dispatch({ type: "GET_COLLECTIONS_FAIL", payload: error.message}))
 
     
-}
+// }
