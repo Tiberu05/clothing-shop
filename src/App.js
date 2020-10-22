@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { StickyContainer, Sticky } from 'react-sticky';
-import { createStructuredSelector } from 'reselect';
 
 // CSS
 import './App.scss';
@@ -13,7 +11,6 @@ import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import AuthPage from './pages/auth/AuthPage';
 import CheckoutPage from './pages/checkout/CheckoutPage';
-import CollectionPage from './pages/collection-page/CollectionPage';
 
 import CartDropdown from './components/cart-dropdown/CartDropdown';
 import MobileNav from './components/mobile-nav/MobileNav';
@@ -23,26 +20,23 @@ import { checkUserSession, logOut } from './redux/actions/auth';
 import { selectCurrentUser } from './redux/selectors/userSelector';
 import { selectCollections } from './redux/selectors/shopSelector';
 
-// FIREBASE
-import { auth, createUserProfileDocument, getCollections, addCollectionAndDocuments } from './firebase/firebase.utils.js';
 
 
 
-const App = (props) => {
+const App = ({ checkUserSession, currentUser, hidden, navMenuOn }) => {
 
     useEffect(() => {
-        const {checkUserSession} = props;
         checkUserSession();
-    }, []);
+    }, [checkUserSession]);
 
     return (
         <div>
         
             <header>      
                 <div className='container'>
-                    {props.hidden ? null : <CartDropdown  />}
+                    {hidden ? null : <CartDropdown  />}
                     
-                    {props.navMenuOn ? <MobileNav /> : null}
+                    {navMenuOn ? <MobileNav /> : null}
                     <Header />
                 </div>
             </header>
@@ -59,7 +53,7 @@ const App = (props) => {
                         <Route 
                             exact 
                             path='/auth' 
-                            render={() => props.currentUser ? (
+                            render={() => currentUser ? (
                                 <Redirect to='/'/>
                             ) : (
                                 <AuthPage />

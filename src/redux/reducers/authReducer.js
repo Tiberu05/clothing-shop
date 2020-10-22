@@ -8,14 +8,12 @@ const INITIAL_STATE = {
 const authReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case "SIGN_IN_SUCCES":
-        case "SIGN_IN_SUCCES":
             return {
                 ...state,
                 isSignedIn: true,
                 currentUser: action.payload,
                 error: null
             }
-        case "SIGN_IN_FAIL":
         case "SIGN_IN_FAIL":
             return {
                 ...state,

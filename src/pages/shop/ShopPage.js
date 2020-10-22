@@ -10,7 +10,7 @@ import CollectionsOverviewContainer from '../../components/CollectionsOverview/C
 
 //import { getCollectionsAction } from '../../redux/actions/shop';
 
-import { fetchCollectionsAsync, fetchCollectionsStart } from '../../redux/actions/shop';
+import { fetchCollectionsStart } from '../../redux/actions/shop';
 
 
 const  ShopPage = ({ fetchCollectionsStart, match, }) => {
@@ -20,7 +20,7 @@ const  ShopPage = ({ fetchCollectionsStart, match, }) => {
 
         fetchCollectionsStart();
 
-    }, [])
+    }, [fetchCollectionsStart])
     
 
     return (

@@ -1,5 +1,3 @@
-import { firestore, convertCollectionsSnapshot } from '../../firebase/firebase.utils';
-
 export const fetchCollectionsStart = () => {
     return { type: "GET_COLLECTIONS_START" }
 };

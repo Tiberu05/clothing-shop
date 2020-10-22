@@ -15,7 +15,7 @@ const CheckoutPage = ({ cartItems, deleteItemFromCart, totalPrice, addToCart, de
         const render = cartItems.map(item => {
             return (
                 <div key={item.id} className='checkout-row'>
-                    <div className='checkout-item image'><img src={`${item.imageUrl}`} /></div>
+                    <div className='checkout-item image'><img alt={item.imageUrl} src={`${item.imageUrl}`} /></div>
                     <div className='checkout-item name'>{item.name}</div>
                     <div className='checkout-item qty'> 
                         <ion-icon onClick={() => decreaseItem(item)} name="chevron-back-outline"></ion-icon>

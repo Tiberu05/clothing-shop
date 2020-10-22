@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import './SignIn.scss';
@@ -6,7 +6,6 @@ import './SignIn.scss';
 import FormInput from '../form-input/FormInput';
 import CustomButton from '../custom-button/CustomButton';
 
-import { auth } from '../../firebase/firebase.utils.js';
 
 import { googleSignInStart, emailSignInStart } from '../../redux/actions/auth';
 

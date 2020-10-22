@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -38,8 +38,6 @@ const CartDropdown = (props) => {
         }
     }
 
-
-    // style={{ top: `${props.position + 70}px`, right: `20px`}}
 
     return (
             <div className='cart-dropdown' onMouseEnter={props.showCart} >

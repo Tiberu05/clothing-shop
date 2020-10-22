@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { toggleNavMenu } from '../../redux/actions/nav';
 import { signOutStart } from '../../redux/actions/auth';
 
-// FIREBASE
-import { auth } from '../../firebase/firebase.utils';
 
 // CSS
 import './MobileNav.scss';

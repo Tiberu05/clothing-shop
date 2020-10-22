@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import './CartItem.scss';
 
@@ -9,7 +8,7 @@ const CartItem = ({ imageUrl, name, totalPrice, qty }) => {
 
     return (
         <div className='cart-item'>
-            <img className='cart-item__img' src={`${imageUrl}`} />
+            <img className='cart-item__img' alt={imageUrl} src={`${imageUrl}`} />
             <div className='cart-item-details'>
                 <span className='cart-item__title'>{name}</span>
                 <div className='price__qty'>

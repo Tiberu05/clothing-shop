@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import CartDropdown from '../cart-dropdown/CartDropdown';
 
 import {ReactComponent as ShoppingBag} from '../../assets/shopping-bag.svg';
 import './CartIcon.scss';
@@ -13,7 +12,7 @@ import { selectCartItemsCount } from '../../redux/selectors/cartSelector';
 
 
 
-const CartIcon = ({ itemsCount, toggleCart, showCart, hideCart }) => {
+const CartIcon = ({ itemsCount }) => {
 
 
 
