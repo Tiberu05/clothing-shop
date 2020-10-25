@@ -9,7 +9,7 @@ const StripeCheckoutButton = ({ price }) => {
     const publishKey = 'pk_test_51HcR5EJ2IJ5jxTAgr3tNW8AkY0Tjq6VaM0WW5KFQ767Bh9nHMpVGzlTGaAXJR34jmKVmd1xS7iE7MsCY4R4AW8cv00i0drriHs';
 
     const onToken = token => {
-        axios.post('http://localhost:5000/payment', {
+        axios.post('/payment', {
             amount: priceForStripe,
             token
         })
