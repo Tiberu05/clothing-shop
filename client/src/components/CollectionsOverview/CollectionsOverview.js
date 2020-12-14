@@ -14,11 +14,11 @@ const CollectionsOverview = (props) => {
 
     const renderCollections = () => {
         if (props.collections) {
-            const render = props.collections.map(({ id, ...otherCollectionProps }) => {
-                return <Collection key={id} {...otherCollectionProps} />
+            return props.collections.map(({ id, items, ...otherCollectionProps }) => {
+                if (items.length === 0) return null;
+                return <Collection key={id} items={items} {...otherCollectionProps} />
             })
     
-            return render;
         }
         
     }

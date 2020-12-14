@@ -1,0 +1,20 @@
+.admin-control {
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+
+    .back-button {
+        position: absolute;
+        display: flex;
+        height: 100%;
+        align-items: center;
+        gap: 5px;
+    
+    
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+

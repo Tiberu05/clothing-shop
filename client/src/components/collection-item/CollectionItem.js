@@ -13,18 +13,28 @@ const CollectionItem = ({ item, addToCart, cartItems }) => {
 
     return (
         <div className='collection-item'>
+
+            <span className='item-name'>{name}</span>
             <div 
                 className='collection-item__image'
                 style={{
                     backgroundImage: `url(${imageUrl})`
                 }}
             >
-                <div className='add-to-cart__btn' onClick={() => addToCart(item)}>Add to cart</div>
+                
             </div>
             <div className='collection-item__footer'>
-                <span className='item-name'>{name}</span>
-                <span className='item-price'>$ {price}</span>
+                
+                <div className='add-to-cart__btn' onClick={() => addToCart(item)}>
+                    <div className='item-carticon'>
+                        <i className="shopping cart icon"></i>
+                        <span>Add to cart</span>
+                    </div>
+                    <span className='item-price'>$ {price}</span>
+                </div>
             </div>
+
+            
             <hr />
         </div>
     )

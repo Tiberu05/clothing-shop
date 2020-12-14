@@ -6,7 +6,6 @@ import createSagaMiddleware from 'redux-saga';
 //import { fetchCollectionsStart } from './sagas/shop';
 import rootSaga from './sagas/rootSaga';
 
-
 import reducers from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();

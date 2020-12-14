@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import uniqid from 'uniqid';
 
 const config = {
     apiKey: "AIzaSyAQ8uKwoegoLeip23ldr3nyX4r1lGIvabs",
@@ -45,6 +46,47 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 }
 
+export const addItem = async (collectionKey, name, price, imageUrl) => {
+    const collectionRef = firestore.doc(`/collections/${collectionKey}`);
+
+    const snapshot = await collectionRef.get();
+
+    return collectionRef.update({
+        items: [ ...snapshot.data().items, { id: uniqid(), name, price, imageUrl }]
+    })
+    .then((res) => console.log('Succes'))
+    .catch(err => console.log(err))
+};
+
+export const updateItem = async (collectionKey,  items, itemID, itemName, itemPrice, newObject) => {
+    const collectionRef = firestore.doc(`/collections/${collectionKey}`);
+
+    return collectionRef.update({
+        items: items.map(item => {
+            if (item.id == itemID) {
+                return { ...item, name: itemName, price: itemPrice }
+            } else {
+                return item
+            }
+        })
+    })
+    .then(() => console.log('Document succesfully updated'))
+    .catch(err => console.log(err))
+
+}
+
+export const deleteItem = async (collectionKey, itemID) => {
+    const collectionRef = firestore.doc(`/collections/${collectionKey}`);
+
+    const snapshot = await collectionRef.get();
+
+    return collectionRef.update({
+        items: snapshot.data().items.filter(el => el.id !== itemID)
+    })
+    .then(() => console.log('Document succesfully deleted'))
+    .catch(err => console.log(err))
+}
+
 
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
     const collectionRef = firestore.collection(collectionKey);
@@ -58,6 +100,8 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 
     return await batch.commit();
 };
+
+
 
 export const getCollections = async () => {
     const collectionsRef = firestore.collection('collections');
@@ -112,5 +156,7 @@ export const getCurrentUser = () => {
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 //export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+ 
 
 export default firebase;

@@ -69,7 +69,7 @@ const Header = ({ currentUser, toggleNavMenu, navMenuOn }) => {
             <div className='nav-menu'>
                 <CartIcon />
                 {navMenuOn && 
-                    <ion-icon onClick={() => {
+                    <ion-icon style={{ marginRight: '5px'}} onClick={() => {
 
                         toggleNavMenu()
                         

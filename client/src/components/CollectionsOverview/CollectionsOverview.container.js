@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import WithSpinner from '../spinner/Spinner';
+import WithSpinner from '../with-spinner/WithSpinner';
 import CollectionsOverview from './CollectionsOverview';
 
 

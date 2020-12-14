@@ -5,6 +5,7 @@ import './CartItem.scss';
 
 const CartItem = ({ imageUrl, name, totalPrice, qty }) => {
     
+    console.log('CART ITEM RENDER');
 
     return (
         <div className='cart-item'>

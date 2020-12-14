@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './CheckoutPage.scss';
 
 import StripeCheckoutButton from '../../components/stripe-button/StripeButton';
+import CheckoutItem from '../../components/checkout-item/CheckoutItem';
 
 import { selectCartItems, cartItemsTotalPrice } from '../../redux/selectors/cartSelector';
 import { addToCart, deleteItemFromCart, decreaseItem } from '../../redux/actions/cart';
@@ -14,18 +15,19 @@ const CheckoutPage = ({ cartItems, deleteItemFromCart, totalPrice, addToCart, de
     const renderCartItems = () => {
         const render = cartItems.map(item => {
             return (
-                <div key={item.id} className='checkout-row'>
-                    <div className='checkout-item image'><img alt={item.imageUrl} src={`${item.imageUrl}`} /></div>
-                    <div className='checkout-item name'>{item.name}</div>
-                    <div className='checkout-item qty'> 
-                        <ion-icon onClick={() => decreaseItem(item)} name="chevron-back-outline"></ion-icon>
-                            {item.qty}
-                        <ion-icon onClick={() => addToCart(item)} name="chevron-forward-outline"></ion-icon>
-                    </div>
-                    <div className='checkout-item price'>${item.price}</div>
-                    <div className='checkout-item remove-item' onClick={() => deleteItemFromCart(item)}><ion-icon className='remove-icon' name="close-circle-outline"></ion-icon>
-                    </div>
-                </div>
+                // <div key={item.id} className='checkout-row'>
+                //     <div className='checkout-item image'><img alt={item.imageUrl} src={`${item.imageUrl}`} /></div>
+                //     <div className='checkout-item name'>{item.name}</div>
+                //     <div className='checkout-item qty'> 
+                //         <ion-icon onClick={() => decreaseItem(item)} name="chevron-back-outline"></ion-icon>
+                //             {item.qty}
+                //         <ion-icon onClick={() => addToCart(item)} name="chevron-forward-outline"></ion-icon>
+                //     </div>
+                //     <div className='checkout-item price'>${item.price}</div>
+                //     <div className='checkout-item remove-item' onClick={() => deleteItemFromCart(item)}><ion-icon className='remove-icon' name="close-circle-outline"></ion-icon>
+                //     </div>
+                // </div>
+                <CheckoutItem key={item.id} item={item} addToCart={addToCart} deleteItemFromCart={deleteItemFromCart} decreaseItem={decreaseItem} />
             );
         });
 

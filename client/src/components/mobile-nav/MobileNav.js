@@ -11,7 +11,7 @@ import { signOutStart } from '../../redux/actions/auth';
 import './MobileNav.scss';
 
 
-const MobileNav = ({ navMenu, toggleNavMenu, isSignedIn, signOutStart }) => {
+const MobileNav = ({ navMenu, toggleNavMenu, isSignedIn, signOutStart, currentUser }) => {
 
     const authLink = () => {
         if (isSignedIn) {
@@ -21,9 +21,19 @@ const MobileNav = ({ navMenu, toggleNavMenu, isSignedIn, signOutStart }) => {
         }
     }
 
+    const adminLink = () => {
+        if (currentUser) {
+            if (currentUser.id === "kEkjO35NXWN0HSECKFKrUradBbW2") {
+                return <Link to='/admin'><div>Admin Control</div></Link>
+            }
+        }
+        
+    }
+
     return (
         <div className='mobile-nav'>
             <div onClick={() => toggleNavMenu()} className='nav-list'>
+                {adminLink()}
                 <Link to='/shop'><div>Shop</div></Link>
                 <Link to='/contact'><div>Contact</div></Link>
                 {authLink()}
@@ -34,7 +44,8 @@ const MobileNav = ({ navMenu, toggleNavMenu, isSignedIn, signOutStart }) => {
 
 const mapStateToProps = state => {
     return {
-        isSignedIn: state.auth.isSignedIn
+        isSignedIn: state.auth.isSignedIn,
+        currentUser: state.auth.currentUser
     }
 }
 
